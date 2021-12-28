@@ -1,6 +1,7 @@
 # HTML-CSS
 
-## 1. CSS정리 <참고 : https://d2.naver.com/helloworld/8540176#ch2>
+## 1. CSS정리 
+<참고 : https://d2.naver.com/helloworld/8540176#ch2>   
   * flexbox 생성   
     - flex container (부모속성) : flex-direction, flex-wrap, jutify-content, align-itmes, align-content   
     - flex item (자식속성) : flex, flex-grow, flex-shrink, flex-basis, order   
