@@ -158,7 +158,8 @@
     justfy-content: space-around; /*교차축을 기준으로 flex-item을 일정 간격으로 정렬*/
     align-content: space-around;
 }  
-    
+```
+   
   <b>10 가로세로비율 유지하는 반응형 박스 레이아웃<b>   
 ```css
  .flex_container{
