@@ -901,13 +901,49 @@ Array.prototype.random = function(){
 var arr = new Array('a', 'b', 'c', 'd', 'e',);
 console.log(arr.random());
 ```
-   --- ↑2022.01.09 작성↑ --- 
+   --- ↑2022.01.09 작성↑ ---    
 ## 23. object
+  <b>1. object란?</b>   
+  - object 객체 : 객체의 가장 기본적인 형태를 가지고 있는 객체   
 
+  <b>2. MDN에서 referance 찾아보기</b>   
+  - method : ex) object.keys();   
+    -> 인자로 결과값 받을 때 : Object.keys(arr)   
+       ```js
+       여기서 Object는 생성자함수 (object.keys = function(); 
+       ```
+  - object : ex) objext.prototype.toSyting();   
+    -> 인자로 결과값 받을 때 : o.toString();   
+    ```js
+       여기서 o는
+       Object.prototype.tostring = function(){   
+   } // 어떤 객체를 생성하고 그 객체의 메소드로써 사용하는 것.   
+          ```
+  - 
+```js
+var arr = ["a","b","c"];
+console.log('(object.keys(arr)', Object.keys(arr));
+Pbject.keys(arr=["0","1","2"]
+// 결과값 : undefined
+
+var o = {"name":"egoing","age":20,"city":"seoul"}
+o
+//결과값 : Object {name: "egoing", age: 20, city: "seoul"}
+Pbject.keys(o);
+["name","age","city"] // keys : 어떤 객체의 키값만을 수집해서 배열로 만들어 리턴하는 메소드
+
+var o = {};
+o.toString(); //결과값: [object Object]
+
+var a = [1,2,3];
+a.toString(); //결과값 : 1,2,3
+
+```
 
 ## 24. 데이터 타입
 
 
 ## 25. 참조
 
+   --- ↑2022. 1.16  작성↑ --    
    --- ↑2022. 1.5까지 끝내기가 목표↑ ---   
