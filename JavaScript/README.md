@@ -909,41 +909,134 @@ console.log(arr.random());
   <b>2. MDN에서 referance 찾아보기</b>   
   - method : ex) object.keys();   
     -> 인자로 결과값 받을 때 : Object.keys(arr)   
-       ```js
-       여기서 Object는 생성자함수 (object.keys = function(); 
-       ```
+       여기서 Object는 생성자함수이며 아래와 같이 생성된다고 할 수 있다. 
+```js
+   Oobject.keys = function(){
+   }
+```
   - object : ex) objext.prototype.toSyting();   
     -> 인자로 결과값 받을 때 : o.toString();   
-    ```js
-       여기서 o는
-       Object.prototype.tostring = function(){   
+```js
+   여기서 o는 아래와 같이 생성된다고 할 수 있다. 
+   Object.prototype.tostring = function(){   
    } // 어떤 객체를 생성하고 그 객체의 메소드로써 사용하는 것.   
-          ```
-  - 
+```
+
+  <b>2. 예시</b>   
+  tip : 대략적인 인상으로 프로그램을 만들면안됨. 자신이 만들고자 하는 것이 어떻게 사용될 것인가를 생각하고 구현해보기
+        기능을 찾아볼 때 어떻게 사용되고 어떤 취지인지 생각해보고 사용하기
 ```js
 var arr = ["a","b","c"];
 console.log('(object.keys(arr)', Object.keys(arr));
-Pbject.keys(arr=["0","1","2"]
-// 결과값 : undefined
-
+Pbject.keys(arr=["0","1","2"] // 결과값 : undefined
 var o = {"name":"egoing","age":20,"city":"seoul"}
-o
-//결과값 : Object {name: "egoing", age: 20, city: "seoul"}
-Pbject.keys(o);
-["name","age","city"] // keys : 어떤 객체의 키값만을 수집해서 배열로 만들어 리턴하는 메소드
+o //결과값 : Object {name: "egoing", age: 20, city: "seoul"}
+Object.keys(o); //결과값 : ["name","age","city"]
+// keys : 어떤 객체의 키값만을 수집해서 배열로 만들어 리턴하는 메소드
 
 var o = {};
 o.toString(); //결과값: [object Object]
 
 var a = [1,2,3];
 a.toString(); //결과값 : 1,2,3
+```
 
+  <b>3. object 확장</b>   
+```js
+/*객체.contain을 호출해서 'egoing'의 리턴값을 true or false로 나타낼 수 있음 
+그런데 만일, js의 모든 객체들에 contain이라는 객체를 통해
+어떤 객체에 값이 포함되는지 t/f로 나타내는 프로그램을을 만들려면?
+=> prototype이라는 생성자의 객체를 사용하면 된다.*/
+
+Object.prototype.contain = function(needle){
+   for (var name in this){
+      if(this[name] === needle){
+         return true;
+      }
+   }
+   return false;
+}
+
+var o = {'name' : 'egoing', 'city' : seou l}
+console.log(o.contain('egoing')); //객체.conatain();
+
+var a = [;egoing','leezche','grapittie'];
+console.log(a.contain('leezche'));
+/*결과값:
+true
+true
+하지만 이러한 방식은 모든 객체에 영향을 주기 때문에 위험할 수 있다.*/
+
+for(var name in o){
+   if(o.hasOwnProperty(name)){
+   //hasOwnProperty를 통해 객체가 상속받은 프로퍼티와 직접만든 프로퍼티를 구분할 수 있음.
+      console.log(name);
+   }
+}
 ```
 
 ## 24. 데이터 타입
+  <b>1. 원시 데이터 타입(=기본 데이터 타입)</b>   
+  - 래퍼객체 존재O : Number, String, bloolean,
+  - 래퍼객체 존재X : null, undefined   
 
+  <b>2. 객체 데이터 타입(=참조 데이터 타입)</b>   
+  - 객체 데이터 타입(원시 데이터 타입이 아닌 데이터 타입)   
 
+  <b>3. 래퍼 객체</b>
+  - 문자열 : 프로퍼티, 메소드가 있음. 
+    근데, 문자열은 객체가 아닌 *원시 데이터 타입*인데 왜 배열처럼 나타나지??  
+      - 객체.metho를 하게되면 내부적으로, 마치 str = new String('coding')로 담아준 것처럼 된다.
+  - 원시데이터는 객체가 아니기에 객체처럼 사용할 수 없는데, 래퍼가 존재해서 마치 객체처럼 사용할 수 있는 것이다.
+    (js는 이 작업을 자동으로 처리해줌)
+```js
+   var str = "coding";
+   consolelog(str.length); //6
+   /* .method : .앞의 것이 객체라는 것을 의미하고, 객체니까 프로퍼티와 메소드가 존재함
+   자바스크립트에서 문자열은 원시 데이터 타입이 맞긴 하지만,
+   문자열을 제어하기 위해서는 문자열이 객체인 것처럼 동작해야만 한다.*/
+   console.log(str.chatAt(0)); //결과값 : "C"
+```
+      
 ## 25. 참조
+  <b>1. 복제</b>   
+```js
+var a = 1;
+var b = a;
+```
+  <b>2. 참조</b>   
+```js
+var a = {'id':1};
+var b = a; //a == b == {'id':1}
+b = {'id':2}; //b에 객체 생성.했으므로, a == 2가됨.
+console.log(a.id); //결과 : 1
+```
 
-   --- ↑2022. 1.16  작성↑ --    
-   --- ↑2022. 1.5까지 끝내기가 목표↑ ---   
+  <b>3. 함수와 참조</b>
+```js
+var a = 1;
+function func(b){
+   b = 2;
+}
+func(a);
+console.log(a) //결과값 : 1
+
+//case2
+var a = {'id':1};
+function func(b){
+   b = {'id':2};
+}
+func(a);
+console.log(a.id); //1
+
+//case3
+var a = {'id':1};
+function func(b){
+   b.id = 2;
+}
+func(a);
+console.log(a.id); //2
+/*데이터가 객체이므로, b = a가 된다.*/
+```
+
+   --- ↑2022. 1.16  작성↑, 입문 강의 끝 --  
