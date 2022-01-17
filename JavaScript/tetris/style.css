@@ -1,0 +1,47 @@
+● {
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    list-style:none;
+}
+
+body{
+    height:100%;
+    overflow:hidden;
+}
+
+.score{
+    text-align:center;
+    font: size 36px;
+    margin-bottom:2rem;
+}
+
+/* 실질적으로 테트리스 디자인이 들어갈 곳 */
+.playground > ul {
+    width: 250px;
+    margin: 0 auto;
+}
+
+.playground >ul >li{
+    width:100%;
+    height:25px;
+}
+
+
+/* 줄마다 세로가 아닌 가로로. 나열되도록. */
+.playground >ul >li > ul{
+    display: flex;
+}
+
+/* 매트릭스 하나하나 */
+.playground > ul > li > ul > li{
+    width: 25px;
+    height: 25px;
+    outline: 1px solid #ccc;
+}
+
+.tree{
+    background : #67c23a
+}
