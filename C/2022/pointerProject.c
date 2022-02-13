@@ -1,98 +1,114 @@
 #include <stdio.h>
 #include <time.h>
 
-/* ì¡°ê±´1 ë¬¼ê³ ê¸° 6ë§ˆë¦¬ê°€ ìˆë‹¤.
-ì¡°ê±´2 ë¬¼ê³ ê¸°ëŠ” ì–´í•­ì— ì‚´ê³  ìˆê³  ì‚¬ë§‰ì´ë‹¤.
-ì¡°ê±´3 ì‚¬ë§‰ì´ ë”ì›Œ ë¬¼ì´ ë¹¨ë¦¬ ì¦ë°œí•¨
-ì¡°ê±´4 ë¬¼ê³ ê¸°ëŠ” ì ì  ì»¤ì ¸ì„œ ë‚˜ì¤‘ì— ë¨¸ê¸ˆ */
+/* Á¶°Ç1 ¹°°í±â 6¸¶¸®°¡ ÀÖ´Ù.
+Á¶°Ç2 ¹°°í±â´Â ¾îÇ×¿¡ »ì°í ÀÖ°í »ç¸·ÀÌ´Ù.
+Á¶°Ç3 »ç¸·ÀÌ ´õ¿ö ¹°ÀÌ »¡¸® Áõ¹ßÇÔ
+Á¶°Ç4 ¹°°í±â´Â Á¡Á¡ Ä¿Á®¼­ ³ªÁß¿¡ ¸Ó±İ */
 
 int level;
 int arrayFish[6];
-int *cursor; // arrayFishë¥¼ ê°€ë¦¬í‚¤ë©´ì„œ ì–´ë–¤ ë¬¼ê³ ê¸°ì— ë¬¼ì„ ì¤„ê²ƒì¸ê°€.
+int* cursor; // arrayFish¸¦ °¡¸®Å°¸é¼­ ¾î¶² ¹°°í±â¿¡ ¹°À» ÁÙ°ÍÀÎ°¡.
 void initData();
 void printFishes();
 void decreseWater(long elapsedTime);
+int checkFishAlive();
 
-int main(void){
-    long startTime = 0;// ì‹œê°„ì€ ë³´í†µ longì‚¬ìš©
-    long totalElapsedTime = 0; //ì´ê²½ê³¼ì‹œê°„
-    long prevElapsedTime = 0; // ì§ì „ ê²½ê³¼ ì‹œê°„(ì§ì „ì— ë¬¼ ì¤€ ê°„ê²©)
+int main(void) {
+    long startTime = 0;// ½Ã°£Àº º¸Åë long»ç¿ë
+    long totalElapsedTime = 0; //ÃÑ°æ°ú½Ã°£
+    long prevElapsedTime = 0; // Á÷Àü °æ°ú ½Ã°£(Á÷Àü¿¡ ¹° ÁØ °£°İ)
 
-    int num; //ì–´í•­ì— ë¬¼ ëª‡ë²ˆ ì¤„ ê²ƒì¸ê°€ ì‚¬ìš©ìê°€ ì…ë ¥í•¨
+    int num; //¾îÇ×¿¡ ¹° ¸î¹ø ÁÙ °ÍÀÎ°¡ »ç¿ëÀÚ°¡ ÀÔ·ÂÇÔ
     initData();
 
     cursor = arrayFish; //cursor[0] cursor[1]
 
-    startTime = clock(); //í˜„ì¬ ì‹œê°„ì„ m/s ë‹¨ìœ„ë¡œ ë°˜í™˜
-    while(1){ //1 ==> ë¬´í•œë°˜ë³µ
+    startTime = clock(); //ÇöÀç ½Ã°£À» m/s ´ÜÀ§·Î ¹İÈ¯
+    while (1) { //1 ==> ¹«ÇÑ¹İº¹
         printFishes();
-        getchar(); // ì„ì‹œ ì‚¬ìš©ì ì…ë ¥ ëŒ€ê¸°
-        printf("ëª‡ë²ˆì–´í•­ì— ë¬¼ì„ ì£¼ì‹œê² ì–´ìš”? ");
+        printf("¸î¹ø¾îÇ×¿¡ ¹°À» ÁÖ½Ã°Ú¾î¿ä? ");
         scanf_s("%d", &num);
 
-        //ì…ë ¥ê°’ ì²´í¬
-        if (num < 1 || num > 6){
-            printf("ì…ë ¥ê°’ì´ ì˜ëª»ë˜ì—ˆì–´ìš”");
+        //ÀÔ·Â°ª Ã¼Å©
+        if (num < 1 || num > 6) {
+            printf("\n\nÀÔ·Â°ªÀÌ Àß¸øµÇ¾ú¾î¿ä\n");
             continue;
         }
 
-        //ì´ ê²½ê³¼ì‹œê°„
+        //ÃÑ °æ°ú½Ã°£
         totalElapsedTime = (clock() - startTime) / CLOCKS_PER_SEC;
-        printf("ì´ ê²½ê³¼ ì‹œê°„: %1dì´ˆ", totalElapsedTime);
+        printf("\n\nÃÑ °æ°ú ½Ã°£: %1dÃÊ", totalElapsedTime);
 
-        //ì§ì „ì— ë¬¼ ì¤€ ì‹œê°„ ì²´í¬ ì´í›„ íë¥¸ ì‹œê°„
+        //Á÷Àü¿¡ ¹° ÁØ ½Ã°£ Ã¼Å© ÀÌÈÄ Èå¸¥ ½Ã°£
         prevElapsedTime = totalElapsedTime - prevElapsedTime;
-        printf("ìµœê·¼ ê²½ê³¼ ì‹œê°„: %1dì´ˆ", prevElapsedTime);
+        printf("\n\nÃÖ±Ù °æ°ú ½Ã°£: %1dÃÊ", prevElapsedTime);
 
-        //ì–´í•­ì˜ ë¬¼ì„ ê°ì†Œ(ì¦ë°œ)
+        //¾îÇ×ÀÇ ¹°À» °¨¼Ò(Áõ¹ß)
         decreseWater(prevElapsedTime);
 
-        //ì‚¬ìš©ìê°€ ì…ë ¥í•œ ì–´í•­ì— ë¬¼ì„ ì¤€ë‹¤.
-        //1. ì–´í•­ì˜ ë¬¼ì´ 0 -> ë¬¼ ì£¼ì§€ ì•ŠëŠ”ë‹¤. (ì´ë¯¸ ë¬¼ê³ ê¸° ì£¼ê¸ˆ)
-        if(cursor[num-1] <=0){
-            printf("ë¬¼ê³ ê¸° ì£½ì—ˆì–´ìš”.. ë¬¼ì„ ì£¼ì§€ ì•ŠìŠµë‹ˆë‹¤...");
-        }  
-        //2. ì–´í•­ì— ë¬¼ì´ 0ì´ ì•„ë‹Œ ê²½ìš° -> ë¬¼ì„ ì£¼ëŠ”ë° 100ë³´ë‹¤ ì‘ê±°ë‚˜ ê°™ìœ¼ë©´ ì¤Œ
-        else if(cursor[num-1]+1 <= 100){
-            printf("%dë²ˆì–´í•­ì— ë¬¼ì„ ì¤ë‹ˆë‹¤");//ë¬¼ì¤€ë‹¤.
-            cursor[num=1] += 1;
+        //»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ ¾îÇ×¿¡ ¹°À» ÁØ´Ù.
+        //1. ¾îÇ×ÀÇ ¹°ÀÌ 0 -> ¹° ÁÖÁö ¾Ê´Â´Ù. (ÀÌ¹Ì ¹°°í±â ÁÖ±İ)
+        if (cursor[num - 1] <= 0) {
+            printf("\n\n¹°°í±â Á×¾ú¾î¿ä.. ¹°À» ÁÖÁö ¾Ê½À´Ï´Ù...\n");
+        }
+        //2. ¾îÇ×¿¡ ¹°ÀÌ 0ÀÌ ¾Æ´Ñ °æ¿ì -> ¹°À» ÁÖ´Âµ¥ 100º¸´Ù ÀÛ°Å³ª °°À¸¸é ÁÜ
+        else if (cursor[num - 1] + 1 <= 100) {
+            printf("\n\n%d¹ø¾îÇ×¿¡ ¹°À» Áİ´Ï´Ù\n", num);//¹°ÁØ´Ù.
+            cursor[num = 1] += 1;
         }
 
-        //ë ˆë²¨ì—†ì„ í• ê±´ì§€ ë§ê±´ì§€(ë ˆë²¨ì—… 20ì´ˆë§ˆë‹¤ ë˜ë„ë¡ ìˆ˜í–‰í•¨)
-        if (totalElapsedTime / 20 > level-1){
+        //·¹º§¾øÀ» ÇÒ°ÇÁö ¸»°ÇÁö(·¹º§¾÷ 20ÃÊ¸¶´Ù µÇµµ·Ï ¼öÇàÇÔ)
+        if (totalElapsedTime / 20 > level - 1) {
             level++; //level : 1-> level : 2
-            printf("**ì¶”ì¹´ì¶”ì¹´ì¶”ë ˆë²¨ì—… : ê¸°ì¡´%dë ˆë²¨ -> %dë¡œ ì—…ê·¸ë ˆì´ë“œ", level-1, level);
-            if (level == 5){
-                printf("\n\n ì¶•í•˜í•©ë‹ˆë‹¤. ìµœê³  ë ˆë²¨ì„ ë‹¬ì„±í–ˆì–´ìš”. ê²Œì…ì„ ì¢…ë£Œí•©ë‹ˆë‹¹.");
+            printf("\n\n**ÃßÄ«ÃßÄ«Ãß·¹º§¾÷ : ±âÁ¸%d·¹º§ -> %d·Î ¾÷±×·¹ÀÌµå\n", level - 1, level);
+            if (level == 5) {
+                printf("\n\n ÃàÇÏÇÕ´Ï´Ù. ÃÖ°í ·¹º§À» ´Ş¼ºÇß¾î¿ä.\n °ÔÀÔÀ» Á¾·áÇÕ´Ï´ç.\n");
                 exit(0);
-            }   
-            //ëª¨ë“  ë¬¼ê³ ê¸°ê°€ ì£½ì—ˆëŠ”ì§€ í™•ì¸
-            //ì—¬ê¸°ë¶€í„° ë‹¤ì‹œ ì‹œì‘í•´ì•¼í•¨!
+            }
+            //¸ğµç ¹°°í±â°¡ Á×¾ú´ÂÁö È®ÀÎ
+            if (checkFishAlive() == 0) {
+                printf("\n\n¸ğµç ¹°°í±â°¡ Á×¾ú¾î¿ä.\n");
+
+            }
+            else {
+                printf("\n\n¹°°í±â°¡ ¾ÆÁ÷ »ì¾ÆÀÖ¾î¿ä.\n");
+            }
+            prevElapsedTime = totalElapsedTime;
+
+            //10ÃÊ->15ÃÊ (5ÃÊ : prevElapsedTime -> 15ÃÊ) -> 25ÃÊ(10ÃÊ..?)
+            
         }
     }
     return 0;
 }
 
-void initData(){
+void initData() {
     int level = 1;
-    for(int i = 0; i< 6; i++){
-        arrayFish[i] = 100;  //ì–´í•­ì˜ ë¬¼ ë†’ì´
+    for (int i = 0; i < 6; i++) {
+        arrayFish[i] = 100;  //¾îÇ×ÀÇ ¹° ³ôÀÌ
     }
 }
 
-void printFishes(){
-    printf("%3dë²ˆ %3dë²ˆ %3dë²ˆ %3dë²ˆ %3dë²ˆ %3dë²ˆ\n", 1,2,3,4,5,6);
-    for(int i=0; i<6; i++){
+void printFishes() {
+    printf("%3d¹ø %3d¹ø %3d¹ø %3d¹ø %3d¹ø %3d¹ø\n", 1, 2, 3, 4, 5, 6);
+    for (int i = 0; i < 6; i++) {
         printf(" %4d ", arrayFish[i]);
     }
     printf("\n\n");
 }
 
-void ecreseWater(long elapsedTime){
-    for (int i = 0;i<6;i++){
-    arrayFish[i] -= (level + 3 * (int)elapsedTime); //3 : ë‚œì´ë„ì¡°ì ˆì„ ìœ„í•œ ê°’
-    if(arrayFish[i] < 0){
+void decreseWater(long elapsedTime) {
+    for (int i = 0; i < 6; i++) {
+        arrayFish[i] -= (level + 3 * (int)elapsedTime); //3 : ³­ÀÌµµÁ¶ÀıÀ» À§ÇÑ °ª
+        if (arrayFish[i] < 0) {
             arrayFish[i] = 0;
         }
+    }
+}
+
+int checkFishAlive() {
+    for (int i = 0; i < 6; i++) {
+        return 1; //Âü:1 °ÅÁş:0
     }
 }
