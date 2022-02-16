@@ -18,7 +18,7 @@ typedef struct GameInfomation{ //GameInformation를 지워버려도.. 실행이 
     struct GameInfo *friendGame; //구조체 안의 구조체
 } GAME_INFO; //struct GameInfomation을 GAME_INFO로 치환하겠다는 것임.
 
-int main(void){
+int main_struct(void){
     /*
     char * name1 = "나도게임";
     int year1 = 2017;
