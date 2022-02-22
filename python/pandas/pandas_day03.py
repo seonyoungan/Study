@@ -19,9 +19,9 @@ Original file is located at
 #연도/월을 분리하는 함수 만들기
 #concat 함수를 이용해 2013~2015 / 2015~2019데이터 합치기
 
-#!sudo apt-get install -y fonts-nanum
-#!sudo fc-cache -fv
-#!rm ~/.cache/matplotlib -rf
+# !sudo apt-get install -y fonts-nanum
+# !sudo fc-cache -fv
+# !rm ~/.cache/matplotlib -rf
 
 import pandas as pd
 import numpy as np
@@ -216,4 +216,51 @@ df_first_melt['월']=df_first_melt['기간'].apply(parse_month)
 df_first_melt
 
 #22-02-22
+
+#sample을 이용해 데이터 미리보기
+df_last.sample() #random한값 하나 나옴
+
+df_last.columns.to_list()
+
+cols = ['지역명', '연도', '월', '평당분양가격']
+
+df_last_prepare = df_last.loc[df_last['전용면적']=='전체', cols].copy()
+
+df_last_prepare
+
+df_first_prepare = df_first_melt.rename(columns={'지역':'지역명'}).copy()
+
+
+
+df_first_prepare
+
+
+
+df=pd.concat([df_first_prepare,df_last_prepare])
+df
+
+#결측치확인하기
+df['연도'].value_counts(sort=False)
+
+#fivot tavle사용해서 전처리...
+t = pd.pivot_table(df,index='연도', columns='지역명',values='평당분양가격').round()
+t
+
+#히트맵으로 표현해보기
+#두개의 
+plt.figure(figsize=(15,7))
+sns.heatmap(t,cmap='PuBu', annot=True, fmt='.0f') #annot=True : values의 값표시되느냐
+sns.heatmap?
+
+#2014~최근
+sns.barplot(data=df, x='연도', y='평당분양가격')
+
+#pointplot
+plt.figure(figsize=(12,4))
+sns.pointplot(data=df,x='연도',y='평당분양가격',hue='지역명')
+
+#평당분양가격 높은 순서대로 그리기
+plt.figure(figsize=(12,4))
+mean_price=df.pivot_table(index='지역명', values='평당분양가격').sort_values(by='평당분양가격', ascending=False)
+sns.barplot(data=mean_price, x=mean_price.index, y='평당분양가격',palette='Blues_r')
 
