@@ -29,3 +29,23 @@
         
   *참고로 TypeScript도 React에서 사용할 수 있다.    
   
+
+## 3. 기본 수정
+index.js : 입구파일 (npm start를 이용해 creact app을 구동시키면, index.js파일을 찾고 그대로 동작한다.   
+App.js : UI전체   
+ - from './App';
+index.html: id가 root인 태그가 있다. 
+```jsx
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+```
+
+## 3. 기본 배포
+  - 배포파일: npm run build    
+  - 빌드 명령 실행시, serve -s build (serve라는 앱(웹서버)을 쓰는 걸 추천함.)   
+    ->사용자가 어떤 경로로 들어오든지 간에,, html파일을 서비스해줌   
+  - serve : nodejs로 만들어짐   
