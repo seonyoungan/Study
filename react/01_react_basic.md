@@ -1,4 +1,4 @@
-<h3>1. basic</h3>   
+## 1. basic  
 1) creact-react-app으로 리액트 프로젝트 생성   
   npm init react-app <폴더이름> 또는   
   VS Code로 열고 터미널에서 npm init react-app .   
@@ -9,8 +9,8 @@
   : 새로고침을 하지 않아도 코드를 고치고 저장하면 바로바로 반영됨   
    
   - 종료하기: ctrl+c   
-<br><br>
-<h3>2. 리액트 특징</h3>   
+   
+## 2. 리액트 특징   
 1) Independent Component
   UI를 여러 컴포넌트로 쪼개어 만든다.   
   한 페이지 내의 여러가지 독립된 컴포넌트 생성(버튼, 표 등) -> 조립 -> 화면 구성   
