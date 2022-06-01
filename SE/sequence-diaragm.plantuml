@@ -1,0 +1,18 @@
+@startuml seqeunce-diagram
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+header software-engineering\n 안선영(20201696)
+title ScoreRecord와 DataSheetView 클래스 사이의 상호작용
+"Client" -> ":ScoreRecord" : 1: addScore(score: int): void
+activate ":ScoreRecord"
+":ScoreRecord" -> ":DataSheetView" : 2: update() : void
+deactivate ":ScoreRecord"
+activate ":DataSheetView"
+skinparam ResponseMessageBelowArrow true
+":ScoreRecord" <-  ":DataSheetView" : 3: getScoreRecord(): List<integer>
+activate ":ScoreRecord" 
+":DataSheetView" -> ":DataSheetView": 4: displayScores(record: List<Integer>.viewCount: int): void
+activate ":DataSheetView"
+deactivate ":ScoreRecord"
+deactivate ":DataSheetView" 
+@enduml

@@ -1,0 +1,53 @@
+@startuml class-diagram
+header software-engineering\n 안선영(20201696)
+title Speaker 클래스의 추가\n
+
+class ComputerDevice{
+    + {abstract} getPrice(): int
+    + {abstract} getPower(): int 
+}
+
+ComputerDevice<|--Speaker
+class Speaker{
+    - price: int
+    - power: int
+    + getPrice(): int
+    + getPower(): int 
+}
+
+ComputerDevice<|--Keyborad
+class Keyborad{
+    - price: int
+    - power: int
+    + getPrice(): int
+    + getPower(): int 
+}
+
+ComputerDevice<|--Body
+class Body{
+    - price: int
+    - power: int
+    + getPrice(): int
+    + getPower(): int     
+}
+
+ComputerDevice<|--Moniter
+class Moniter{
+    - price: int
+    - power: int
+    + getPrice(): int
+    + getPower(): int     
+}
+
+
+
+ComputerDevice<|--Computer
+Computer *--|> "0..*"ComputerDevice : component >
+
+class Computer{ 
+    +addComponent(component: ComputerDevice): void
+    +removeComponent(component: ComputerDevice): void
+    +getPrice(): int
+    +getPower() : int
+}
+@enduml

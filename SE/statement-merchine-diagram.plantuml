@@ -1,0 +1,13 @@
+@startuml statement-merchine-diagram
+header software-engineering\n 안선영(20201696)
+title '취침등'상태를 추가한 상태 머신 다이어그램
+
+hide empty description
+[*] --> OFF
+OFF --> OFF : off_button_pushed
+OFF <-- ON : off_button_pushed
+OFF --> ON : on_button_pushed 
+ON <-- SLEEPING : on_button_pushed
+ON --> SLEEPING : on_button_pushed
+OFF <-- SLEEPING : off_button_pushed
+@enduml
