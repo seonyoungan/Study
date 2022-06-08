@@ -41,6 +41,9 @@
       - 장점: 속도 빠름
       - C: 배정문을 하나의 식으로 보고 오류를 낼 수 있어 권장 안함
       - java: Short- Circuit를 사용하지 않음
+    2. 예시
+      - (13 * a) * (b / 13 -1)이라는 식이 있을 경우, a = 0이면 뒷부분을 계산하지 않는다.
+      - 장점: 속도 빠름
       
 #### 4. Assignment Statements
     1. Simple Assignment
@@ -57,8 +60,13 @@
     6. Multiple Assignments
       - 튜플형태의 자료구조
       - 장점: 식이 짧아짐, 가독성 좋음
-        
-#### 8. Mixed-Mode Assignment
+      - 6장의 튜플형태의 자료구조이다. (축약해서 써서 가독성 좋음)
+      - 예: 루비의 ($first, $second, $third) = (10, 20, 30);     
+
+#### 5. Relational and Boolean Expression
+    1. Boolean 표현: True, False 논리기호 쓸 수 있다.
+
+#### 6. Mixed-Mode Assignment
     1. 예를 들어 a = b+c일 때, a는 int이고 b+c는 float인 경우
        왼쪽의 타입에 맞추는 것이 상식적으로 맞다.
       
