@@ -10,8 +10,8 @@
 
 - [x] [01.프로그래밍](https://github.com/seonyoungan/iOS-toyproject/blob/main/todo-list](https://github.com/seonyoungan/TIL/blob/main/JavaScript/mordernJS/01.%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.md))   
 - [x] [02.자바스크립트란?](https://github.com/seonyoungan/TIL/blob/main/JavaScript/mordernJS/02.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%9E%80%3F.md)   
-- [ ] [03.자바스크립트 개발 환경과 실행 방법]   
-- [ ] [04.변수]   
+- [x] [03.자바스크립트 개발 환경과 실행 방법](https://github.com/seonyoungan/TIL/blob/main/JavaScript/mordernJS/03.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EA%B0%9C%EB%B0%9C%20%ED%99%98%EA%B2%BD%EA%B3%BC%20%EC%8B%A4%ED%96%89%20%EB%B0%A9%EB%B2%95.md)   
+- [x] [04.변수](https://github.com/seonyoungan/TIL/blob/main/JavaScript/mordernJS/04.%EB%B3%80%EC%88%98.md)   
 - [ ] [05.표현식과 문]   
 - [ ] [06.데이터타입]   
 - [ ] [07.연산자]   
